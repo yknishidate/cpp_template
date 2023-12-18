@@ -1,13 +1,19 @@
-cmake_minimum_required(VERSION 3.20.0)
+cmake_minimum_required(VERSION 3.19)
 
-project(Example LANGUAGES CXX)
+project(your-project-name)
 
-find_package(spdlog CONFIG REQUIRED)
-
+# Set C++20 standard
 set(CMAKE_CXX_STANDARD 20)
 
-FILE(GLOB_RECURSE SRC_FILES "src/*.cpp" "src/*.h")
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+# Find spdlog package
+find_package(spdlog CONFIG REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    spdlog::spdlog)
+# Add your source files under src/
+file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp")
+file(GLOB_RECURSE PROJECT_HEADERS "src/*.hpp")
+
+# Define the executable with the source files
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
+
+# Link spdlog
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
